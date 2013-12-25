@@ -1,0 +1,49 @@
+{
+  "name": "grunt-ftp",
+  "version": "0.0.0",
+  "description": "Upload files to an FTP-server",
+  "license": "MIT",
+  "repository": "sindresorhus/grunt-ftp",
+  "author": {
+    "name": "Sindre Sorhus",
+    "email": "sindresorhus@gmail.com",
+    "url": "http://sindresorhus.com"
+  },
+  "engines": {
+    "node": ">=0.8.0"
+  },
+  "scripts": {
+    "test": "grunt"
+  },
+  "files": [
+    "tasks"
+  ],
+  "keywords": [
+    "gruntplugin",
+    "ftp",
+    "jsftp",
+    "file",
+    "transfer",
+    "protocol",
+    "server",
+    "client",
+    "upload",
+    "deploy",
+    "deployment"
+  ],
+  "dependencies": {
+    "each-async": "~0.1.1",
+    "chalk": "~0.4.0",
+    "jsftp": "~1.2.1",
+    "jsftp-mkdirp": "~0.1.0"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-simple-mocha": "~0.4.0",
+    "ftp-test-server": "0.0.1"
+  },
+  "peerDependencies": {
+    "grunt": "~0.4.0"
+  }
+}
