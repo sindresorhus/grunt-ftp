@@ -1,4 +1,4 @@
-# grunt-ftp [![Build Status](https://secure.travis-ci.org/sindresorhus/grunt-ftp.png?branch=master)](http://travis-ci.org/sindresorhus/grunt-ftp)
+# grunt-ftp [![Build Status](https://travis-ci.org/sindresorhus/grunt-ftp.svg?branch=master)](https://travis-ci.org/sindresorhus/grunt-ftp)
 
 > Upload files to an FTP-server
 
@@ -9,8 +9,8 @@ Useful for uploading and deploying things.
 
 If you haven't used [grunt][] before, be sure to check out the [Getting Started][] guide, as it explains how to create a [gruntfile][Getting Started] as well as install and use grunt plugins. Once you're familiar with that process, install this plugin with this command:
 
-```sh
-npm install --save-dev grunt-ftp
+```bash
+$ npm install --save-dev grunt-ftp
 ```
 
 Once the plugin has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:
@@ -74,4 +74,4 @@ Default: `'@anonymous'`
 
 ## License
 
-MIT © [Sindre Sorhus](http://sindresorhus.com)
+[MIT](http://opensource.org/licenses/MIT) © [Sindre Sorhus](http://sindresorhus.com)
