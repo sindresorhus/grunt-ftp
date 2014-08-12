@@ -34,7 +34,8 @@ grunt.initConfig({
 		options: {									// Options
 			host: 'website.com',
 			user: 'johndoe',
-			pass: '1234'
+			pass: '1234',
+			conf: './website-ftp.json'
 		},
 		upload: {									// Target
 			files: {								// Dictionary of files
@@ -50,6 +51,12 @@ grunt.registerTask('default', ['ftp']);
 
 
 ### Options
+
+#### conf
+
+Type: `String`
+
+A path to a JSON configuration file, containing the required properties below.
 
 #### host
 
