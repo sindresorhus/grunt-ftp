@@ -11,7 +11,9 @@ module.exports = function (grunt) {
 		var done = this.async();
 		var options = this.options();
 		var fileCount = 0;
-
+		if (options.config) {
+			options = grunt.file.readJSON(options.config);
+		}
 		if (options.host === undefined) {
 			throw new Error('`host` required.');
 		}
