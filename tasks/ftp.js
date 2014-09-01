@@ -13,7 +13,7 @@ module.exports = function (grunt) {
 		var fileCount = 0;
 
 		if (options.host === undefined) {
-			throw new Error('`host` required.');
+			throw new Error('`host` required');
 		}
 
 		eachAsync(this.files, function (el, i, next) {
@@ -23,14 +23,16 @@ module.exports = function (grunt) {
 
 			ftp.mkdirp(path.dirname(finalRemotePath), function (err) {
 				if (err) {
-					return next(err);
+					next(err);
+					return;
 				}
 
 				var buffer = grunt.file.read(el.src[0], {encoding: null});
 
 				ftp.put(buffer, finalRemotePath, function (err) {
 					if (err) {
-						return next(err);
+						next(err);
+						return;
 					}
 
 					fileCount++;
@@ -40,7 +42,8 @@ module.exports = function (grunt) {
 			});
 		}, function (err) {
 			if (err) {
-				return grunt.warn(err);
+				grunt.warn(err);
+				return;
 			}
 
 			if (fileCount > 0) {
