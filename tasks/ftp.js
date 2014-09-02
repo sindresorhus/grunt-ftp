@@ -43,6 +43,7 @@ module.exports = function (grunt) {
 		}, function (err) {
 			if (err) {
 				grunt.warn(err);
+				done();
 				return;
 			}
 
