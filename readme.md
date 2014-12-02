@@ -8,7 +8,7 @@ Useful for uploading and deploying things.
 ## Install
 
 ```sh
-$ npm install --save-dev grunt-shell
+$ npm install --save-dev grunt-ftp
 ```
 
 
