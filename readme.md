@@ -35,6 +35,27 @@ grunt.initConfig({
 grunt.registerTask('default', ['ftp']);
 ```
 
+Handle files/cwd/dest syntax to upload every file in a folder preserving their path.
+```js
+require('load-grunt-tasks')(grunt);
+
+grunt.initConfig({
+	ftp: {
+		options: {
+			host: 'website.com',
+			user: 'johndoe',
+			pass: '1234'
+		},
+		upload: {
+			files: [{
+				cwd: '<%= context.buildFolder %>',
+				src: ['**/*', '.*', '.*/**/*', '.*/.*', '.*/**/.*', '.*/.*/.*'],
+				dest: '<%= context.deployFolder %>'
+			}]
+		}
+	}
+});
+```
 
 ## Options
 
