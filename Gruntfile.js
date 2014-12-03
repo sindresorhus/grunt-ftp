@@ -9,9 +9,15 @@ module.exports = function (grunt) {
 					user: 'test',
 					pass: 'test'
 				},
-				files: {
-					'ftp': 'fixture/fixture.txt'
-				}
+				files: [{
+					cwd: 'fixture',
+					src: ['**/*'],
+					dest: 'ftp'
+				},{
+					cwd: 'fixture2',
+					src: ['**/*'],
+					dest: 'ftp'
+				}]
 			}
 		},
 		simplemocha: {
