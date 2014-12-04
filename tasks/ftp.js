@@ -19,12 +19,13 @@ module.exports = function (grunt) {
 
 		this.files.forEach(function(el) {
 
-			grunt.verbose.writeln( chalk.yellow(el.cwd), ' -> ', chalk.yellow(el.dest),  chalk.green(el.src.length) );
+			var srcFolder = el.cwd || '';
+			grunt.verbose.writeln( chalk.yellow(srcFolder), ' -> ', chalk.yellow(el.dest),  chalk.green(el.src.length) );
 
 			eachAsync(el.src, function (filename, i, next) {
 				// have to create a new connection for each file otherwise they conflict
 
-				var fullSrcPath = path.join( el.cwd, filename),
+				var fullSrcPath = path.join( srcFolder, filename),
 					finalRemotePath = path.join('/', el.dest, filename);
 
 				if( grunt.file.isFile(fullSrcPath) ){
