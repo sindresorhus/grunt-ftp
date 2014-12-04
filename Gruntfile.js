@@ -25,7 +25,9 @@ module.exports = function (grunt) {
 					src: ['*'],
 					dest: 'ftp'
 				},{
-					'ftp': 'fixture/**/fixture3.txt',
+					cwd: 'fixture',
+					dest: 'ftp',
+					src: '**/fixture3.txt'
 				}]
 			}
 		},

@@ -8,5 +8,5 @@ it('should upload files to an FTP-server', function () {
 
 it('should upload file to the right path starting from cwd directory', function () {
     assert(grunt.file.exists('ftp/fixture2.txt'));
-    assert(grunt.file.exists('ftp/fixture/fixture2/fixture3/fixture3.txt'));
+    assert(grunt.file.exists('ftp/fixture2/fixture3/fixture3.txt'));
 });
