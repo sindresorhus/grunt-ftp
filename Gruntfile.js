@@ -21,11 +21,11 @@ module.exports = function (grunt) {
 					pass: 'test'
 				},
 				files: [{
-					'ftp': 'fixture/**/*',
-				},{
-					cwd: 'fixture2',
-					src: ['**/*'],
+					cwd: 'fixture/fixture2',
+					src: ['*'],
 					dest: 'ftp'
+				},{
+					'ftp': 'fixture/**/fixture3.txt',
 				}]
 			}
 		},
