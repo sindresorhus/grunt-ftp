@@ -25,16 +25,17 @@ grunt.initConfig({
 			pass: '1234'
 		},
 		upload: {
-			files: {
-				'public_html': 'src/*'
-			}
+			files: [{
+				cwd: 'src',
+				src: ['**/*'],
+				dest: 'public_html'
+			}]
 		}
 	}
 });
 
 grunt.registerTask('default', ['ftp']);
 ```
-
 
 ## Options
 
