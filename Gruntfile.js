@@ -12,6 +12,23 @@ module.exports = function (grunt) {
 				files: {
 					'ftp': 'fixture/fixture.txt'
 				}
+			},
+			test2: {
+				options: {
+					host: 'localhost',
+					port: 3334,
+					user: 'test',
+					pass: 'test'
+				},
+				files: [{
+					cwd: 'fixture/fixture2',
+					src: ['*'],
+					dest: 'ftp'
+				},{
+					cwd: 'fixture',
+					dest: 'ftp',
+					src: '**/fixture3.txt'
+				}]
 			}
 		},
 		simplemocha: {
