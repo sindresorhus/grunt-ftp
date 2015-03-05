@@ -7,7 +7,7 @@ var JSFtp = require('jsftp');
 JSFtp = require('jsftp-mkdirp')(JSFtp);
 
 module.exports = function (grunt) {
-	grunt.registerMultiTask('ftp', 'Upload files to an FTP-server', function () {
+	grunt.registerMultiTask('ftpPut', 'Upload files to an FTP-server', function () {
 		var done = this.async();
 		var options = this.options();
 		var fileCount = 0;
@@ -79,7 +79,7 @@ module.exports = function (grunt) {
 			var finalLocalPath = el.dest;
 			if(grunt.file.isDir(el.dest)) {
 				// if dest is a directory, have to create a file with source filename
-				var filename = path.parse(el.src[0]).name + path.parse(el.src[0]).ext;
+				var filename = path.basename(el.src[0]);
 				finalLocalPath = path.join(el.dest, '/', filename);
 			}
 

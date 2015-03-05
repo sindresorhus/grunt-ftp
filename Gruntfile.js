@@ -4,7 +4,7 @@ module.exports = function (grunt) {
 		dirs: {
 			local: __dirname
 		},
-		ftp: {
+		ftpPut: {
 			test: {
 				options: {
 					host: 'localhost',
@@ -69,7 +69,7 @@ module.exports = function (grunt) {
 	grunt.registerTask('default', [
 		'clean',
 		'pre',
-		'ftp',
+		'ftpPut',
 		'ftpGet',
 		'simplemocha',
 		'post',
