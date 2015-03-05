@@ -1,6 +1,9 @@
 'use strict';
 module.exports = function (grunt) {
 	grunt.initConfig({
+		dirs: {
+			local: __dirname
+		},
 		ftp: {
 			test: {
 				options: {
@@ -14,13 +17,27 @@ module.exports = function (grunt) {
 				}
 			}
 		},
+		ftpGet: {
+			test: {
+				options: {
+					host: 'localhost',
+					port: 3334,
+					user: 'test',
+					pass: 'test'
+				},
+				files: {
+					'fixtureGet/fixture2.txt': 'ftp/fixture/fixture.txt',
+					'<%= dirs.local %>/fixtureGet': 'ftp/fixture/fixture.txt'
+				}
+			}
+		},
 		simplemocha: {
 			test: {
 				src: 'test.js'
 			}
 		},
 		clean: {
-			test: ['ftp']
+			test: ['ftp', 'fixtureGet']
 		}
 	});
 
@@ -53,6 +70,7 @@ module.exports = function (grunt) {
 		'clean',
 		'pre',
 		'ftp',
+		'ftpGet',
 		'simplemocha',
 		'post',
 		'clean'

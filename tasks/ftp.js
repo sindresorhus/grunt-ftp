@@ -56,4 +56,58 @@ module.exports = function (grunt) {
 			done();
 		});
 	});
+
+	grunt.registerMultiTask('ftpGet', 'Download files from an FTP-server', function () {
+		var done = this.async();
+		var options = this.options();
+		var fileCount = 0;
+
+		if (options.host === undefined) {
+			throw new Error('`host` required');
+		}
+
+
+		eachAsync(this.files, function (el, i, next) {
+			// have to create a new connection for each file otherwise they conflict
+			var ftp = new JSFtp(options);
+
+			if(!grunt.file.exists(el.dest)) {
+				// if dest path doesn't exists, we create the full dirname
+				grunt.file.mkdir(path.dirname(el.dest));
+			}
+
+			var finalLocalPath = el.dest;
+			if(grunt.file.isDir(el.dest)) {
+				// if dest is a directory, have to create a file with source filename
+				var filename = path.parse(el.src[0]).name + path.parse(el.src[0]).ext;
+				finalLocalPath = path.join(el.dest, '/', filename);
+			}
+
+			// retrieve the file
+			ftp.get(el.src[0], finalLocalPath, function (err) {
+				if (err) {
+					next(err);
+					return;
+				}
+
+				fileCount++;
+				ftp.raw.quit();
+				next();
+			});
+		}, function (err) {
+			if (err) {
+				grunt.warn(err);
+				done();
+				return;
+			}
+
+			if (fileCount > 0) {
+				grunt.log.writeln(chalk.green(fileCount, fileCount === 1 ? 'file' : 'files', 'downloaded successfully'));
+			} else {
+				grunt.log.writeln(chalk.yellow('No files downloaded'));
+			}
+
+			done();
+		});
+	});
 };
