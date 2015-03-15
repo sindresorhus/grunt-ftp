@@ -18,7 +18,7 @@ $ npm install --save-dev grunt-ftp
 require('load-grunt-tasks')(grunt); // npm install --save-dev load-grunt-tasks
 
 grunt.initConfig({
-	ftp: {
+	ftpPut: {
 		options: {
 			host: 'website.com',
 			user: 'johndoe',
@@ -32,7 +32,7 @@ grunt.initConfig({
 	}
 });
 
-grunt.registerTask('default', ['ftp']);
+grunt.registerTask('default', ['ftpPut']);
 ```
 
 ## Download Usage
@@ -47,15 +47,15 @@ grunt.initConfig({
 			user: 'johndoe',
 			pass: '1234'
 		},
-		upload: {
+		download: {
 			files: {
-				'public_html': 'src/file.txt'
+				'public_html/file.txt': 'src/file.txt'
 			}
 		}
 	}
 });
 
-grunt.registerTask('default', ['ftp']);
+grunt.registerTask('default', ['ftpGet']);
 ```
 
 ## Options
@@ -79,10 +79,6 @@ Default: `'anonymous'`
 
 Type: `string`  
 Default: `'@anonymous'`
-
-## Notes
-
-For downloading task, if dest path is a folder that doesn't exists, this will be create
 
 ## License
 

@@ -71,16 +71,13 @@ module.exports = function (grunt) {
 			// have to create a new connection for each file otherwise they conflict
 			var ftp = new JSFtp(options);
 
-			if(!grunt.file.exists(el.dest)) {
-				// if dest path doesn't exists, we create the full dirname
-				grunt.file.mkdir(path.dirname(el.dest));
-			}
+			grunt.file.mkdir(path.dirname(el.dest));
 
 			var finalLocalPath = el.dest;
 			if(grunt.file.isDir(el.dest)) {
 				// if dest is a directory, have to create a file with source filename
 				var filename = path.basename(el.src[0]);
-				finalLocalPath = path.join(el.dest, '/', filename);
+				finalLocalPath = path.join(el.dest, filename);
 			}
 
 			// retrieve the file
