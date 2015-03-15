@@ -6,7 +6,7 @@ it('should upload files to an FTP-server', function () {
 	assert(grunt.file.exists('ftp/fixture/fixture.txt'));
 });
 
-it('should create a new folder for retrieve files', function() {
+it('should create a new folder for retrieve files', function () {
 	assert(grunt.file.isDir('fixtureGet'));
 });
 

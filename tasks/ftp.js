@@ -74,7 +74,7 @@ module.exports = function (grunt) {
 			grunt.file.mkdir(path.dirname(el.dest));
 
 			var finalLocalPath = el.dest;
-			if(grunt.file.isDir(el.dest)) {
+			if (grunt.file.isDir(el.dest)) {
 				// if dest is a directory, have to create a file with source filename
 				var filename = path.basename(el.src[0]);
 				finalLocalPath = path.join(el.dest, filename);
