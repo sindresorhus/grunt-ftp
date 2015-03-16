@@ -66,7 +66,6 @@ module.exports = function (grunt) {
 			throw new Error('`host` required');
 		}
 
-
 		eachAsync(this.files, function (el, i, next) {
 			// have to create a new connection for each file otherwise they conflict
 			var ftp = new JSFtp(options);
@@ -75,9 +74,8 @@ module.exports = function (grunt) {
 
 			var finalLocalPath = el.dest;
 			if (grunt.file.isDir(el.dest)) {
-				// if dest is a directory, have to create a file with source filename
-				var filename = path.basename(el.src[0]);
-				finalLocalPath = path.join(el.dest, filename);
+				// if dest is a directory we have to create a file with the source filename
+				finalLocalPath = path.join(el.dest, path.basename(el.src[0]));
 			}
 
 			// retrieve the file
