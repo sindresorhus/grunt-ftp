@@ -1,7 +1,7 @@
 {
   "name": "grunt-ftp",
   "version": "2.0.0",
-  "description": "Upload files to an FTP-server",
+  "description": "Upload files to or download from an FTP-server",
   "license": "MIT",
   "repository": "sindresorhus/grunt-ftp",
   "author": {

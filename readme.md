@@ -1,18 +1,20 @@
 # grunt-ftp [![Build Status](https://travis-ci.org/sindresorhus/grunt-ftp.svg?branch=master)](https://travis-ci.org/sindresorhus/grunt-ftp)
 
-> Upload or Download files to / from an FTP-Server
+> Upload files to or download from an FTP-server
 
 Useful for uploading, deploying and downloading things.
 
 
 ## Install
 
-```sh
+```
 $ npm install --save-dev grunt-ftp
 ```
 
 
-## Upload Usage
+## Usage
+
+### Upload
 
 ```js
 require('load-grunt-tasks')(grunt); // npm install --save-dev load-grunt-tasks
@@ -35,7 +37,7 @@ grunt.initConfig({
 grunt.registerTask('default', ['ftpPut']);
 ```
 
-## Download Usage
+### Download
 
 ```js
 require('load-grunt-tasks')(grunt); // npm install --save-dev load-grunt-tasks
@@ -58,6 +60,7 @@ grunt.initConfig({
 grunt.registerTask('default', ['ftpGet']);
 ```
 
+
 ## Options
 
 ### host
@@ -79,6 +82,7 @@ Default: `'anonymous'`
 
 Type: `string`  
 Default: `'@anonymous'`
+
 
 ## License
 
