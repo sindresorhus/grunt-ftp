@@ -65,25 +65,25 @@ grunt.registerTask('default', ['ftpGet']);
 
 ### host
 
-*Required*  
+*Required*<br>
 Type: `string`
 
 ### port
 
-Type: `number`  
+Type: `number`<br>
 Default: `21`
 
 ### user
 
-Type: `string`  
+Type: `string`<br>
 Default: `'anonymous'`
 
 ### pass
 
-Type: `string`  
+Type: `string`<br>
 Default: `'@anonymous'`
 
 
 ## License
 
-MIT © [Sindre Sorhus](http://sindresorhus.com)
+MIT © [Sindre Sorhus](https://sindresorhus.com)

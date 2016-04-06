@@ -1,4 +1,5 @@
 'use strict';
+/* eslint-env mocha */
 var assert = require('assert');
 var grunt = require('grunt');
 
@@ -12,5 +13,5 @@ it('should create a new folder for retrieve files', function () {
 
 it('should download 2 files from an FTP-server', function () {
 	assert(grunt.file.isFile('fixtureGet/fixture.txt'));
-	assert(grunt.file.isFile('fixtureGet/fixture2.txt'))
+	assert(grunt.file.isFile('fixtureGet/fixture2.txt'));
 });

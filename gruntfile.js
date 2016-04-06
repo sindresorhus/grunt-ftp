@@ -13,7 +13,7 @@ module.exports = function (grunt) {
 					pass: 'test'
 				},
 				files: {
-					'ftp': 'fixture/fixture.txt'
+					ftp: 'fixture/fixture.txt'
 				}
 			}
 		},
