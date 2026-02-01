@@ -19,9 +19,9 @@ module.exports = function (grunt) {
 		eachAsync(this.files, function (el, i, next) {
 			// have to create a new connection for each file otherwise they conflict
 			var ftp = new JSFtp(options);
-			var finalRemotePath = path.join('/', el.dest, el.src[0]);
+			var finalRemotePath = path.posix.join('/', el.dest, el.src[0]);
 
-			ftp.mkdirp(path.dirname(finalRemotePath), function (err) {
+			ftp.mkdirp(path.posix.dirname(finalRemotePath), function (err) {
 				if (err) {
 					next(err);
 					return;
