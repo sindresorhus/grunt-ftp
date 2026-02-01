@@ -1,8 +1,10 @@
 'use strict';
+const process = require('node:process');
+
 module.exports = function (grunt) {
 	grunt.initConfig({
 		dirs: {
-			local: __dirname
+			local: __dirname,
 		},
 		ftpPut: {
 			test: {
@@ -10,12 +12,12 @@ module.exports = function (grunt) {
 					host: 'localhost',
 					port: 3334,
 					user: 'test',
-					pass: 'test'
+					pass: 'test',
 				},
 				files: {
-					ftp: 'fixture/fixture.txt'
-				}
-			}
+					ftp: 'fixture/fixture.txt',
+				},
+			},
 		},
 		ftpGet: {
 			test: {
@@ -23,37 +25,37 @@ module.exports = function (grunt) {
 					host: 'localhost',
 					port: 3334,
 					user: 'test',
-					pass: 'test'
+					pass: 'test',
 				},
 				files: {
 					'fixtureGet/fixture2.txt': 'ftp/fixture/fixture.txt',
-					'<%= dirs.local %>/fixtureGet': 'ftp/fixture/fixture.txt'
-				}
-			}
+					'<%= dirs.local %>/fixtureGet': 'ftp/fixture/fixture.txt',
+				},
+			},
 		},
 		simplemocha: {
 			test: {
-				src: 'test.js'
-			}
+				src: 'test.js',
+			},
 		},
 		clean: {
-			test: ['ftp', 'fixtureGet']
-		}
+			test: ['ftp', 'fixtureGet'],
+		},
 	});
 
 	grunt.loadTasks('tasks');
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-simple-mocha');
 
-	var mockServer;
+	let mockServer;
 	grunt.registerTask('pre', function () {
-		var Server = require('ftp-test-server');
+		const Server = require('ftp-test-server');
 
 		mockServer = new Server();
 
 		mockServer.init({
 			user: 'test',
-			pass: 'test'
+			pass: 'test',
 		});
 
 		mockServer.on('stdout', process.stdout.write.bind(process.stdout));
@@ -62,7 +64,7 @@ module.exports = function (grunt) {
 		setTimeout(this.async(), 500);
 	});
 
-	grunt.registerTask('post', function () {
+	grunt.registerTask('post', () => {
 		mockServer.stop();
 	});
 
@@ -73,6 +75,6 @@ module.exports = function (grunt) {
 		'ftpGet',
 		'simplemocha',
 		'post',
-		'clean'
+		'clean',
 	]);
 };

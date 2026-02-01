@@ -1,48 +1,51 @@
 'use strict';
-var path = require('path');
-var eachAsync = require('each-async');
-var chalk = require('chalk');
-var JSFtp = require('jsftp');
+const {pipeline} = require('node:stream/promises');
+const fs = require('node:fs');
+const path = require('node:path');
+const eachAsync = require('each-async');
+const chalk = require('chalk');
+// Not using jsftp v2 because `put` hangs.
+let JSFtp = require('jsftp');
 
 JSFtp = require('jsftp-mkdirp')(JSFtp);
 
 module.exports = function (grunt) {
 	grunt.registerMultiTask('ftpPut', 'Upload files to an FTP-server', function () {
-		var done = this.async();
-		var options = this.options();
-		var fileCount = 0;
+		const done = this.async();
+		const options = this.options();
+		let fileCount = 0;
 
 		if (options.host === undefined) {
 			throw new Error('`host` required');
 		}
 
-		eachAsync(this.files, function (el, i, next) {
-			// have to create a new connection for each file otherwise they conflict
-			var ftp = new JSFtp(options);
-			var finalRemotePath = path.posix.join('/', el.dest, el.src[0]);
+		eachAsync(this.files, (element, i, next) => {
+			// Have to create a new connection for each file otherwise they conflict
+			const ftp = new JSFtp(options);
+			const finalRemotePath = path.posix.join('/', element.dest, element.src[0]);
 
-			ftp.mkdirp(path.posix.dirname(finalRemotePath), function (err) {
-				if (err) {
-					next(err);
+			ftp.mkdirp(path.posix.dirname(finalRemotePath), error => {
+				if (error) {
+					next(error);
 					return;
 				}
 
-				var buffer = grunt.file.read(el.src[0], {encoding: null});
+				const buffer = grunt.file.read(element.src[0], {encoding: null});
 
-				ftp.put(buffer, finalRemotePath, function (err) {
-					if (err) {
-						next(err);
+				ftp.put(buffer, finalRemotePath, error => {
+					if (error) {
+						next(error);
 						return;
 					}
 
 					fileCount++;
-					ftp.raw.quit();
+					ftp.raw('quit');
 					next();
 				});
 			});
-		}, function (err) {
-			if (err) {
-				grunt.warn(err);
+		}, error => {
+			if (error) {
+				grunt.warn(error);
 				done();
 				return;
 			}
@@ -58,40 +61,44 @@ module.exports = function (grunt) {
 	});
 
 	grunt.registerMultiTask('ftpGet', 'Download files from an FTP-server', function () {
-		var done = this.async();
-		var options = this.options();
-		var fileCount = 0;
+		const done = this.async();
+		const options = this.options();
+		let fileCount = 0;
 
 		if (options.host === undefined) {
 			throw new Error('`host` required');
 		}
 
-		eachAsync(this.files, function (el, i, next) {
-			// have to create a new connection for each file otherwise they conflict
-			var ftp = new JSFtp(options);
+		eachAsync(this.files, (element, i, next) => {
+			// Have to create a new connection for each file otherwise they conflict
+			const ftp = new JSFtp(options);
 
-			grunt.file.mkdir(path.dirname(el.dest));
+			grunt.file.mkdir(path.dirname(element.dest));
 
-			var finalLocalPath = el.dest;
-			if (grunt.file.isDir(el.dest)) {
-				// if dest is a directory we have to create a file with the source filename
-				finalLocalPath = path.join(el.dest, path.basename(el.src[0]));
+			let finalLocalPath = element.dest;
+			if (grunt.file.isDir(element.dest)) {
+				// If dest is a directory we have to create a file with the source filename
+				finalLocalPath = path.join(element.dest, path.basename(element.src[0]));
 			}
 
-			// retrieve the file
-			ftp.get(el.src[0], finalLocalPath, function (err) {
-				if (err) {
-					next(err);
+			// Using stream-based `get` because the file-based variant hangs on modern Node.js.
+			ftp.get(element.src[0], (error, socket) => {
+				if (error) {
+					next(error);
 					return;
 				}
 
-				fileCount++;
-				ftp.raw.quit();
-				next();
+				const writeStream = fs.createWriteStream(finalLocalPath);
+				socket.resume();
+				pipeline(socket, writeStream).then(() => {
+					fileCount++;
+					ftp.raw('quit');
+					next();
+				}, next);
 			});
-		}, function (err) {
-			if (err) {
-				grunt.warn(err);
+		}, error => {
+			if (error) {
+				grunt.warn(error);
 				done();
 				return;
 			}

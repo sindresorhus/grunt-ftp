@@ -1,51 +1,60 @@
 {
-  "name": "grunt-ftp",
-  "version": "2.1.0",
-  "description": "Upload files to or download from an FTP-server",
-  "license": "MIT",
-  "repository": "sindresorhus/grunt-ftp",
-  "author": {
-    "name": "Sindre Sorhus",
-    "email": "sindresorhus@gmail.com",
-    "url": "sindresorhus.com"
-  },
-  "engines": {
-    "node": ">=0.10.0"
-  },
-  "scripts": {
-    "test": "xo && grunt"
-  },
-  "files": [
-    "tasks"
-  ],
-  "keywords": [
-    "gruntplugin",
-    "ftp",
-    "jsftp",
-    "file",
-    "transfer",
-    "protocol",
-    "server",
-    "client",
-    "upload",
-    "deploy",
-    "deployment"
-  ],
-  "dependencies": {
-    "chalk": "^1.0.0",
-    "each-async": "^1.0.0",
-    "jsftp": "^1.3.0",
-    "jsftp-mkdirp": "^1.0.0"
-  },
-  "devDependencies": {
-    "ftp-test-server": "0.0.2",
-    "grunt": "^1.0.1",
-    "grunt-cli": "^1.2.0",
-    "grunt-contrib-clean": "^1.0.0",
-    "grunt-simple-mocha": "^0.4.0",
-    "xo": "*"
-  },
-  "peerDependencies": {
-    "grunt": ">=0.4.0"
-  }
+	"name": "grunt-ftp",
+	"version": "2.1.0",
+	"description": "Upload files to or download from an FTP-server",
+	"license": "MIT",
+	"repository": "sindresorhus/grunt-ftp",
+	"funding": "https://github.com/sponsors/sindresorhus",
+	"author": {
+		"name": "Sindre Sorhus",
+		"email": "sindresorhus@gmail.com",
+		"url": "https://sindresorhus.com"
+	},
+	"type": "commonjs",
+	"exports": "./tasks/ftp.js",
+	"sideEffects": false,
+	"engines": {
+		"node": ">=20"
+	},
+	"scripts": {
+		"test": "xo && grunt"
+	},
+	"files": [
+		"tasks"
+	],
+	"keywords": [
+		"gruntplugin",
+		"ftp",
+		"jsftp",
+		"file",
+		"transfer",
+		"protocol",
+		"server",
+		"client",
+		"upload",
+		"deploy",
+		"deployment"
+	],
+	"dependencies": {
+		"chalk": "^1.0.0",
+		"each-async": "^1.0.0",
+		"jsftp": "^1.5.0",
+		"jsftp-mkdirp": "^1.0.0"
+	},
+	"devDependencies": {
+		"ftp-test-server": "0.0.2",
+		"grunt": "^1.0.1",
+		"grunt-cli": "^1.2.0",
+		"grunt-contrib-clean": "^1.0.0",
+		"grunt-simple-mocha": "^0.4.0",
+		"xo": "^0.54.0"
+	},
+	"peerDependencies": {
+		"grunt": ">=0.4.0"
+	},
+	"xo": {
+		"rules": {
+			"unicorn/prefer-module": "off"
+		}
+	}
 }

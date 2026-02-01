@@ -6,8 +6,8 @@ Useful for uploading, deploying and downloading things.
 
 ## Install
 
-```
-$ npm install --save-dev grunt-ftp
+```sh
+npm install --save-dev grunt-ftp
 ```
 
 ## Usage
